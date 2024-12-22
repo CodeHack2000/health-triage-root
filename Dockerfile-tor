@@ -1,0 +1,38 @@
+FROM ubuntu:latest
+
+RUN apt update && apt install -y tor
+
+RUN mkdir -p /var/lib/tor/instance1 /var/lib/tor/instance2 /var/lib/tor/instance3 /var/lib/tor/instance4 /var/lib/tor/instance5 /var/lib/tor/instance6 /var/lib/tor/instance7 /var/lib/tor/instance8 /var/lib/tor/instance9 /var/lib/tor/instance10 /var/lib/tor/instance11 /var/lib/tor/instance12 /var/lib/tor/instance13 /var/lib/tor/instance14 /var/lib/tor/instance15 /var/lib/tor/instance16 /var/lib/tor/instance17 /var/lib/tor/instance18 /var/lib/tor/instance19 /var/lib/tor/instance20 /var/lib/tor/instance21 /var/lib/tor/instance22 /var/lib/tor/instance23 /var/lib/tor/instance24
+
+COPY ./torrc/torrc1 /etc/tor/torrc1
+COPY ./torrc/torrc2 /etc/tor/torrc2
+COPY ./torrc/torrc3 /etc/tor/torrc3
+COPY ./torrc/torrc4 /etc/tor/torrc4
+COPY ./torrc/torrc5 /etc/tor/torrc5
+COPY ./torrc/torrc6 /etc/tor/torrc6
+COPY ./torrc/torrc7 /etc/tor/torrc7
+COPY ./torrc/torrc8 /etc/tor/torrc8
+COPY ./torrc/torrc9 /etc/tor/torrc9
+COPY ./torrc/torrc10 /etc/tor/torrc10
+COPY ./torrc/torrc11 /etc/tor/torrc11
+COPY ./torrc/torrc12 /etc/tor/torrc12
+COPY ./torrc/torrc13 /etc/tor/torrc13
+COPY ./torrc/torrc14 /etc/tor/torrc14
+COPY ./torrc/torrc15 /etc/tor/torrc15
+COPY ./torrc/torrc16 /etc/tor/torrc16
+COPY ./torrc/torrc17 /etc/tor/torrc17   
+COPY ./torrc/torrc18 /etc/tor/torrc18
+COPY ./torrc/torrc19 /etc/tor/torrc19
+COPY ./torrc/torrc20 /etc/tor/torrc20
+COPY ./torrc/torrc21 /etc/tor/torrc21
+COPY ./torrc/torrc22 /etc/tor/torrc22
+COPY ./torrc/torrc23 /etc/tor/torrc23
+COPY ./torrc/torrc24 /etc/tor/torrc24
+
+COPY start-tor.sh /usr/local/bin/start-tor.sh
+
+RUN chmod +x /usr/local/bin/start-tor.sh
+
+EXPOSE 9050 9051 9052 9053 9054 9055 9056 9057 9058 9059 9060 9061 9062 9063 9064 9065 9066 9067 9068 9069 9070 9071 9072 9073 9074 9075 9076 9077 9078 9079 9080 9081 9082 9083 9084 9085 9086 9087 9088 9089 9090 9091 9092 9093 9094 9095 9096 9097
+
+CMD ["/usr/local/bin/start-tor.sh"]

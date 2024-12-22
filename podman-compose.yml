@@ -1,0 +1,119 @@
+networks:
+  scraping-network:
+    driver: bridge
+
+services:
+  db-container:
+    image: postgres:latest
+    container_name: db-container
+    networks:
+      - scraping-network
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: j7a1ix5PrvRgn0yBO6CNL1FtqCscFT0f3YLqfqVg9W7kz6sXuw
+      POSTGRES_DB: scraping_db
+    volumes: 
+      - /home/user/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  tor-container:
+    build:
+      context: .
+      dockerfile: Dockerfile-tor
+    container_name: tor-container
+    networks:
+      - scraping-network
+    expose:
+      - "9050"
+      - "9051"
+      - "9052"
+      - "9053"
+      - "9054"
+      - "9055"
+      - "9056"
+      - "9057"
+      - "9058"
+      - "9059"
+      - "9060"
+      - "9061"
+      - "9062"
+      - "9063"
+      - "9064"
+      - "9065"
+      - "9066"
+      - "9067"
+      - "9068"
+      - "9069"
+      - "9070"
+      - "9071"
+      - "9072"
+      - "9073"
+      - "9074"
+      - "9075"
+      - "9076"
+      - "9077"
+      - "9078"
+      - "9079"
+      - "9080"
+      - "9081"
+      - "9082"
+      - "9083"
+      - "9084"
+      - "9085"
+      - "9086"
+      - "9087"
+      - "9088"
+      - "9089"
+      - "9090"
+      - "9091"
+      - "9092"
+      - "9093"
+      - "9094"
+      - "9095"
+      - "9096"
+      - "9097"
+
+  scraping-api-container:
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    container_name: scraping-api-container
+    env_file:
+      - ./scraping_api/.env
+    networks:
+      - scraping-network
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db-container
+      - tor-container
+    volumes: 
+      - /home/user/scraping-api/data:/home/pptruser/app/src/data
+      - /home/user/scraping-api/logs:/home/pptruser/app/src/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '24.0'
+          memory: 16GB
+        reservations:
+          memory: 8GB
+          cpus: '12.0'
+
+  chat-ai-api-container:
+    build:
+      context: .
+      dockerfile: Dockerfile-chat-ai-api
+    container_name: chat-ai-api-container
+    env_file:
+      - ./chat_ai_api/.env
+    networks:
+      - scraping-network
+    ports:
+      - "3100:3100"
+    depends_on:
+      - db-container
+      - tor-container
+      - scraping-api-container
+    volumes:
+      - /home/user/chat-ai-api/logs:/app/src/logs

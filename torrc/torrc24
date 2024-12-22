@@ -1,0 +1,5 @@
+SocksPort 0.0.0.0:9096
+ControlPort 0.0.0.0:9097
+CookieAuthentication 0
+DataDirectory /var/lib/tor/instance24
+HashedControlPassword 16:2C872F921740D89760D7BEEFB48273ADBC2D86E5E93207B748F8FB5D2F

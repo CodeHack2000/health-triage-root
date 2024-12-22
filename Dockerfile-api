@@ -1,0 +1,32 @@
+FROM ghcr.io/puppeteer/puppeteer:latest
+
+# Define o diretório de trabalho
+WORKDIR /home/pptruser/app
+
+# Configura um diretório global de npm acessível ao utilizador pptruser
+RUN mkdir -p /home/pptruser/.npm-global && \
+    npm config set prefix '/home/pptruser/.npm-global'
+
+# Adiciona o diretório global ao PATH
+ENV PATH=/home/pptruser/.npm-global/bin:$PATH
+
+# Define o utilizador não-root para execução segura
+USER pptruser
+
+# Copia o package.json e instala as dependências
+COPY ./scraping_api/package.json ./
+
+# Instala pacotes globais (agora em /home/pptruser/.npm-global)
+RUN npm install -g sequelize sequelize-cli nodemon pg
+
+# Instala as dependências do projeto localmente
+RUN npm install
+
+# Copia o restante do código para o container
+COPY ./scraping_api/ .
+
+# Expõe a porta para a API
+EXPOSE 3000
+
+# Comando para iniciar o servidor
+CMD ["npm", "run", "start"]

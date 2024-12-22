@@ -1,0 +1,15 @@
+FROM node:20.16.0
+
+WORKDIR /app
+
+COPY ./chat_ai_api/package.json ./
+
+RUN npm install -g sequelize sequelize-cli nodemon pg
+
+RUN npm install
+
+COPY ./chat_ai_api/ .
+
+EXPOSE 3100
+
+CMD ["npm", "run", "start"]

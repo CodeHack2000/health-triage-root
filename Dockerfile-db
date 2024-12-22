@@ -1,0 +1,9 @@
+FROM postgres:latest
+
+ENV POSTGRES_USER=admin
+ENV POSTGRES_PASSWORD=j7a1ix5PrvRgn0yBO6CNL1FtqCscFT0f3YLqfqVg9W7kz6sXuw
+ENV POSTGRES_DB=scraping_db
+
+EXPOSE 5432
+
+CMD ["postgres"]

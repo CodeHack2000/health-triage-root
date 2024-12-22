@@ -1,0 +1,5 @@
+SocksPort 0.0.0.0:9086
+ControlPort 0.0.0.0:9087
+CookieAuthentication 0
+DataDirectory /var/lib/tor/instance19
+HashedControlPassword 16:5F915A6FEB9803B8607DADA70377CA9B2CAC40C297D8ADB7B143032CD3
